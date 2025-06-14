@@ -27,8 +27,10 @@ GameExamples >> gameWithPlayerAAndNextTurn [
 	| game |
 	game := self emptyGame.
 	game currentPlayer uncover:game board cards first .
-	"game board cards third covered: false."
-	^ game	"card flip atRandom"
+	game currentPlayer uncover:game board cards third .
+	game nextTurn.
+	game board cards do: [:eachCard | self assert: eachCard isCovered ].
+	^ game
 ]
 
 { #category : #'as yet unclassified' }
