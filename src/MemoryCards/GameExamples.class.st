@@ -20,7 +20,23 @@ GameExamples >> emptyGame [
 ]
 
 { #category : #'as yet unclassified' }
-GameExamples >> gameWithPlayerAAndNextTurn [
+GameExamples >> gameWithPlayerAMatchingAndNextTurn [
+	"Satz= Object, Message, evtl. Argument"
+
+	<gtExample>
+	| game |
+	game := self emptyGame.
+	game currentPlayer uncover:game board cards first .
+	game currentPlayer uncover:game board cards second .
+	game nextTurn .
+	self assert: game board cards size equals: 2 .
+	"game board cards first disappear.
+	game board cards second disappear."
+	^ game
+]
+
+{ #category : #'as yet unclassified' }
+GameExamples >> gameWithPlayerANotMatchingAndNextTurn [
 	"Satz= Object, Message, evtl. Argument"
 
 	<gtExample>

@@ -37,6 +37,11 @@ Board >> asElement [
 ]
 
 { #category : #'as yet unclassified' }
+Board >> card [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
 Board >> cards [
 	^ cards
 ]
