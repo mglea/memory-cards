@@ -70,3 +70,8 @@ Board >> initialize [
 	super initialize.
 	cards := OrderedCollection new
 ]
+
+{ #category : #'as yet unclassified' }
+Board >> removeCards: aCollection [
+	aCollection do: [ :eachCard | cards remove: eachCard ifAbsent: [  ] ]
+]

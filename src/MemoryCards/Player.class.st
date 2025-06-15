@@ -34,3 +34,8 @@ Player >> uncover: aCard [
 	aCard covered: false.
 	uncoveredCards add: aCard.
 ]
+
+{ #category : #'as yet unclassified' }
+Player >> uncoveredCards [
+	^ uncoveredCards
+]
