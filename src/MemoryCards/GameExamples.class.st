@@ -30,8 +30,7 @@ GameExamples >> gameWithPlayerAMatchingAndNextTurn [
 	game currentPlayer uncover:game board cards second .
 	game nextTurn .
 	self assert: game board cards size equals: 2 .
-	"game board cards first disappear.
-	game board cards second disappear."
+	self assert: game currentPlayer capturedPairs size equals: 1.
 	^ game
 ]
 

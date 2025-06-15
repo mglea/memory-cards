@@ -3,10 +3,16 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'uncoveredCards'
+		'uncoveredCards',
+		'capturedPairs'
 	],
 	#category : #MemoryCards
 }
+
+{ #category : #'as yet unclassified' }
+Player >> capturedPairs [
+	^capturedPairs
+]
 
 { #category : #'as yet unclassified' }
 Player >> gtDisplayOn: stream [
@@ -21,7 +27,8 @@ Player >> hasSameUncoveredCards [
 { #category : #'as yet unclassified' }
 Player >> initialize [
 	super initialize.
-	uncoveredCards := OrderedCollection new
+	uncoveredCards := OrderedCollection new.
+	capturedPairs := OrderedCollection new
 ]
 
 { #category : #accessing }
