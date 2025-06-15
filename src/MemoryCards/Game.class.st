@@ -65,6 +65,11 @@ Game >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> isFinished [
+	^ board cards isEmpty
+]
+
+{ #category : #'as yet unclassified' }
 Game >> nextPlayer [
 ^currentPlayer=players last
 ifTrue:[players first]

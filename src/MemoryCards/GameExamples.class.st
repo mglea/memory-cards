@@ -20,6 +20,23 @@ GameExamples >> emptyGame [
 ]
 
 { #category : #'as yet unclassified' }
+GameExamples >> gameWithPlayerAFinishing [
+	"Satz= Object, Message, evtl. Argument"
+
+	<gtExample>
+	| game |
+	game := self gameWithPlayerAMatchingAndNextTurn.
+	game currentPlayer uncover:game board cards first .
+	game currentPlayer uncover:game board cards second .
+	game nextTurn.
+	self assert: game board cards size equals: 0 .
+	self assert: game currentPlayer capturedPairs size equals: 2.
+	self assert: game currentPlayer uncoveredCards size equals: 0.
+	self assert: game isFinished.
+	^ game
+]
+
+{ #category : #'as yet unclassified' }
 GameExamples >> gameWithPlayerAMatchingAndNextTurn [
 	"Satz= Object, Message, evtl. Argument"
 
@@ -31,10 +48,11 @@ GameExamples >> gameWithPlayerAMatchingAndNextTurn [
 	self assert: game board cards size equals: 4 .
 	self assert: game currentPlayer capturedPairs size equals: 0.
 	self assert: game currentPlayer uncoveredCards size equals: 2.
-	game nextTurn .
+	game nextTurn.
 	self assert: game board cards size equals: 2 .
 	self assert: game currentPlayer capturedPairs size equals: 1.
 	self assert: game currentPlayer uncoveredCards size equals: 0.
+	self assert: game isFinished not.
 	^ game
 ]
 
