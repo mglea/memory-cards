@@ -80,7 +80,8 @@ ifFalse: [players after: currentPlayer]
 { #category : #'as yet unclassified' }
 Game >> nextTurn [
 	self currentPlayer hasSameUncoveredCards
-		ifTrue: [ board removeCards: self currentPlayer uncoveredCards	"currentPlayer takeUncoveredCards." ]
+		ifTrue: [ board removeCards: self currentPlayer uncoveredCards.
+			currentPlayer takeUncoveredCards ]
 		ifFalse: [ self currentPlayer: self nextPlayer.
 			board cards do: [ :eachCard | eachCard covered: true ] ]
 ]

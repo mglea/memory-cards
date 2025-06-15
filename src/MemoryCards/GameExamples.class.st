@@ -28,9 +28,13 @@ GameExamples >> gameWithPlayerAMatchingAndNextTurn [
 	game := self emptyGame.
 	game currentPlayer uncover:game board cards first .
 	game currentPlayer uncover:game board cards second .
+	self assert: game board cards size equals: 4 .
+	self assert: game currentPlayer capturedPairs size equals: 0.
+	self assert: game currentPlayer uncoveredCards size equals: 2.
 	game nextTurn .
 	self assert: game board cards size equals: 2 .
 	self assert: game currentPlayer capturedPairs size equals: 1.
+	self assert: game currentPlayer uncoveredCards size equals: 0.
 	^ game
 ]
 

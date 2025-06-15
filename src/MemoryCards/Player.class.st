@@ -37,6 +37,12 @@ Player >> name: aString [
 ]
 
 { #category : #'as yet unclassified' }
+Player >> takeUncoveredCards [
+	capturedPairs add: uncoveredCards copy.
+	uncoveredCards removeAll.
+]
+
+{ #category : #'as yet unclassified' }
 Player >> uncover: aCard [
 	aCard covered: false.
 	uncoveredCards add: aCard.
