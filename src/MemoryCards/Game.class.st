@@ -17,61 +17,9 @@ Game >> addPlayer: aPlayer [
 
 { #category : #accessing }
 Game >> asElement [
-	| playersContainer boardElement gameContainer cardElement container |
-	gameContainer := BrHorizontalPane new fitContent.
-	container := BlElement new.
-	container background: Color lightOrange.
-	container size: 400 @ 400.
-	container layout: BlFlowLayout new.
-	board cards
-		do: [ :eachCard | 
-			cardElement := BrVerticalPane new
-					background: Color white;
-					alignCenter.
-			cardElement
-				when: BlClickEvent
-				do: [ :e | 
-					eachCard isCovered
-						ifTrue: [ self currentPlayer uncover: eachCard.
-							self currentPlayer uncoveredCards size = 2 ifTrue: [ self nextTurn ] ] ].
-			eachCard isCovered
-				ifFalse: [ cardElement
-						addChild: (BrLabel new
-								aptitude: BrGlamorousLabelAptitude;
-								text: eachCard string) ].
-			cardElement margin: (BlInsets all: 25).
-			cardElement size: 50 @ 50.
-			container addChild: cardElement ].
-	boardElement := container.
-	boardElement
-		margin: (BlInsets all: 20);
-		aptitude: BrShadowAptitude new beLarge.
-	playersContainer := BrVerticalPane new
-			margin: (BlInsets all: 20);
-			vMatchParent;
-			hFitContent.
-	self players
-		do: [ :eachPlayer | 
-			| playerContainer playerlabel |
-			playerContainer := BrVerticalPane new
-					vMatchParent;
-					hFitContent.
-			playerlabel := BrLabel new
-					text: 'Player: ' , eachPlayer name;
-					aptitude: (BrGlamorousLabelAptitude new
-							fontSize: 20;
-							highlight: (eachPlayer = self currentPlayer
-									ifTrue: [ Color lightOrange ]
-									ifFalse: [ Color transparent ])).
-			playerContainer addChild: playerlabel.
-			playerContainer
-				addChild: (BrLabel new
-						text: 'Pairs: ' , eachPlayer capturedPairs size asString;
-						aptitude: BrGlamorousLabelAptitude new).
-			playersContainer addChild: playerContainer ].
-	gameContainer addChild: playersContainer.
-	gameContainer addChild: boardElement.
-	^ gameContainer
+	^ GameElement new
+		game: self;
+		createGame
 ]
 
 { #category : #accessing }
@@ -148,7 +96,8 @@ Game >> nextTurn [
 	self currentPlayer hasSameUncoveredCards
 		ifTrue: [ board removeCards: self currentPlayer uncoveredCards.
 			currentPlayer takeUncoveredCards ]
-		ifFalse: [ self currentPlayer: self nextPlayer.
+		ifFalse: [ self currentPlayer forgetUncoveredCards.
+			self currentPlayer: self nextPlayer.
 			board cards do: [ :eachCard | eachCard covered: true ] ]
 ]
 

@@ -15,6 +15,11 @@ Player >> capturedPairs [
 ]
 
 { #category : #'as yet unclassified' }
+Player >> forgetUncoveredCards [
+	uncoveredCards removeAll
+]
+
+{ #category : #'as yet unclassified' }
 Player >> gtDisplayOn: stream [
 	stream nextPutAll: name
 ]
@@ -44,7 +49,7 @@ Player >> name: aString [
 { #category : #'as yet unclassified' }
 Player >> takeUncoveredCards [
 	capturedPairs add: uncoveredCards copy.
-	uncoveredCards removeAll.
+	self forgetUncoveredCards
 ]
 
 { #category : #'as yet unclassified' }

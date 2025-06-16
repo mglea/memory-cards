@@ -63,12 +63,14 @@ GameExamples >> gameWithPlayerANotMatchingAndNextTurn [
 	"Satz= Object, Message, evtl. Argument"
 
 	<gtExample>
-	| game |
+	| game initialPlayer |
 	game := self emptyGame.
+	initialPlayer := game currentPlayer.
 	game currentPlayer uncover:game board cards first .
 	game currentPlayer uncover:game board cards third .
 	game nextTurn.
 	game board cards do: [:eachCard | self assert: eachCard isCovered ].
+	self assert: initialPlayer uncoveredCards size = 0.
 	^ game
 ]
 
