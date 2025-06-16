@@ -46,6 +46,12 @@ Board >> cards [
 	^ cards
 ]
 
+{ #category : #accessing }
+Board >> cards: anObject [
+
+	cards := anObject
+]
+
 { #category : #views }
 Board >> gtBoardElementFor: aView [
 	<gtView>

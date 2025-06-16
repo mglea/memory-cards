@@ -17,9 +17,27 @@ Game >> addPlayer: aPlayer [
 
 { #category : #accessing }
 Game >> asElement [
-	| playersContainer boardElement gameContainer |
+	| playersContainer boardElement gameContainer cardElement container |
 	gameContainer := BrHorizontalPane new fitContent.
-	boardElement := board asElement.
+	container := BlElement new.
+	container background: Color lightOrange.
+	container size: 400 @ 400.
+	container layout: BlFlowLayout new.
+	board cards
+		do: [ :eachCard | 
+			cardElement := BrVerticalPane new
+					background: Color white;
+					alignCenter.
+			cardElement when: BlClickEvent do: [ :e |self currentPlayer uncover: eachCard ].
+			eachCard isCovered
+				ifFalse: [ cardElement
+						addChild: (BrLabel new
+								aptitude: BrGlamorousLabelAptitude;
+								text: eachCard string) ].
+			cardElement margin: (BlInsets all: 25).
+			cardElement size: 50 @ 50.
+			container addChild: cardElement ].
+	boardElement := container.
 	boardElement
 		margin: (BlInsets all: 20);
 		aptitude: BrShadowAptitude new beLarge.
