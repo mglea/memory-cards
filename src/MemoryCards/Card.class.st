@@ -29,6 +29,11 @@ Card >> flip [
 ]
 
 { #category : #'as yet unclassified' }
+Card >> gtDisplayOn: stream [
+	stream nextPutAll: self content.
+]
+
+{ #category : #'as yet unclassified' }
 Card >> initialize [
 	super initialize.
 	isCovered := true

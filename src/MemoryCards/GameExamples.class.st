@@ -9,7 +9,8 @@ GameExamples >> emptyGame [
 	<gtExample>
 	| game playerB playerA board |
 	game := Game new.
-	board := BoardExamples new boardwith4Cards. game board: board.
+	board := BoardExamples new boardwith4Cards.
+	game board: board.
 	playerA := Player new name: 'A'.
 	playerB := Player new name: 'B'.
 	game addPlayer: playerA.
@@ -48,9 +49,7 @@ GameExamples >> gameWithPlayerAMatchingAndNextTurn [
 	self assert: game board cards size equals: 4 .
 	self assert: game currentPlayer capturedPairs size equals: 0.
 	self assert: game currentPlayer uncoveredCards size equals: 2.
-		self halt.
 	game nextTurn.
-
 	self assert: game board cards size equals: 2 .
 	self assert: game currentPlayer capturedPairs size equals: 1.
 	self assert: game currentPlayer uncoveredCards size equals: 0.

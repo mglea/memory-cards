@@ -81,3 +81,8 @@ Board >> initialize [
 Board >> removeCards: aCollection [
 	aCollection do: [ :eachCard | cards remove: eachCard ifAbsent: [  ] ]
 ]
+
+{ #category : #accessing }
+Board >> shuffleCards [
+	^ self cards: self cards shuffle
+]
