@@ -31,6 +31,11 @@ Player >> initialize [
 	capturedPairs := OrderedCollection new
 ]
 
+{ #category : #'as yet unclassified' }
+Player >> name [
+	^ name
+]
+
 { #category : #accessing }
 Player >> name: aString [ 
 	name:= aString

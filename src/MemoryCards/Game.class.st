@@ -16,6 +16,42 @@ Game >> addPlayer: aPlayer [
 ]
 
 { #category : #accessing }
+Game >> asElement [
+	| playersContainer boardElement gameContainer |
+	gameContainer := BrHorizontalPane new fitContent.
+	boardElement := board asElement.
+	boardElement
+		margin: (BlInsets all: 20);
+		aptitude: BrShadowAptitude new beLarge.
+	playersContainer := BrVerticalPane new
+			margin: (BlInsets all: 20);
+			vMatchParent;
+			hFitContent.
+	self players
+		do: [ :eachPlayer | 
+			| playerContainer playerlabel |
+			playerContainer := BrVerticalPane new
+					vMatchParent;
+					hFitContent.
+			playerlabel := BrLabel new
+					text: 'Player: ' , eachPlayer name;
+					aptitude: (BrGlamorousLabelAptitude new
+							fontSize: 20;
+							highlight: (eachPlayer = self currentPlayer
+									ifTrue: [ Color lightOrange ]
+									ifFalse: [ Color transparent ])).
+			playerContainer addChild: playerlabel.
+			playerContainer
+				addChild: (BrLabel new
+						text: 'Pairs: ' , eachPlayer capturedPairs size asString;
+						aptitude: BrGlamorousLabelAptitude new).
+			playersContainer addChild: playerContainer ].
+	gameContainer addChild: playersContainer.
+	gameContainer addChild: boardElement.
+	^ gameContainer
+]
+
+{ #category : #accessing }
 Game >> board [
 	^board
 ]
@@ -38,12 +74,11 @@ Game >> currentPlayer: aPlayer [
 ]
 
 { #category : #views }
-Game >> gtBoardFor: aView [
+Game >> gtGameFor: aView [
 	<gtView>
-	^ aView forward
-		title: 'Board ';
-		object: [ board ];
-		view: #gtBoardElementFor:
+	^ aView explicit
+		title: 'Game';
+		stencil: [ self asElement ]
 ]
 
 { #category : #views }
