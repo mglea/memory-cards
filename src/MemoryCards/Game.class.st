@@ -28,7 +28,12 @@ Game >> asElement [
 			cardElement := BrVerticalPane new
 					background: Color white;
 					alignCenter.
-			cardElement when: BlClickEvent do: [ :e |self currentPlayer uncover: eachCard ].
+			cardElement
+				when: BlClickEvent
+				do: [ :e | 
+					eachCard isCovered
+						ifTrue: [ self currentPlayer uncover: eachCard.
+							self currentPlayer uncoveredCards size = 2 ifTrue: [ self nextTurn ] ] ].
 			eachCard isCovered
 				ifFalse: [ cardElement
 						addChild: (BrLabel new
@@ -108,7 +113,10 @@ Game >> gtPlayersFor: aView [
 		items: [ players ];
 		column: 'Players' text: [ :each | each gtDisplayString ];
 		column: 'Current'
-		text:[ :each | each = self currentPlayer ifTrue: [' ;)'] ifFalse: [ ':(']]
+			text: [ :each | each = self currentPlayer ifTrue: [ ' ;)' ] ifFalse: [ ':(' ] ];
+		column: 'uncoveredCards' text: [ :each | each uncoveredCards size ];
+		column: 'capturedPairs' text: [ :each | each capturedPairs size ];
+		column: 'Card on the Board' text: [ :each | self board cards size ]
 ]
 
 { #category : #'as yet unclassified' }
