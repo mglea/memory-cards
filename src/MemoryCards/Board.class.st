@@ -12,30 +12,6 @@ Board >> addCard: aCard [
 	cards add: aCard
 ]
 
-{ #category : #accessing }
-Board >> asElement [
-	| cardElement container |
-	container := BlElement new.
-	container background: Color lightOrange.
-	container size: 400 @ 400.
-	container layout: BlFlowLayout new.
-	cards
-		do: [ :eachCard | 
-			cardElement := BrVerticalPane new
-					background: Color white;
-					alignCenter.
-			cardElement when: BlClickEvent do: [ :e| eachCard flip ].
-			eachCard isCovered
-				ifFalse: [ cardElement
-						addChild: (BrLabel new
-								aptitude: BrGlamorousLabelAptitude;
-								text: eachCard string) ].
-			cardElement margin: (BlInsets all: 25).
-			cardElement size: 50 @ 50.
-			container addChild: cardElement ].
-	^ container
-]
-
 { #category : #'as yet unclassified' }
 Board >> card [
 	self shouldBeImplemented.
@@ -50,15 +26,6 @@ Board >> cards [
 Board >> cards: anObject [
 
 	cards := anObject
-]
-
-{ #category : #views }
-Board >> gtBoardElementFor: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Board';
-		priority: 1;
-		stencil: [ self asElement ]
 ]
 
 { #category : #views }

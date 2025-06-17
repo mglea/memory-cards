@@ -18,6 +18,17 @@ PictureCard >> content [
 	^ pictureFile fullName
 ]
 
+{ #category : #views }
+PictureCard >> gtContentFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Content';
+		stencil: [ | pane |
+			pane := BrVerticalPane new size: 200 @ 200.
+			self addCardContentToElement: pane.
+			pane ]
+]
+
 { #category : #'as yet unclassified' }
 PictureCard >> gtDisplayOn: stream [
 	stream nextPutAll: pictureFile basename

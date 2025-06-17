@@ -9,7 +9,23 @@ GameExamples >> emptyGame [
 	<gtExample>
 	| game playerB playerA board |
 	game := Game new.
-	board := BoardExamples new boardwith4Cards.
+	board := BoardExamples new boardwith4TextCards.
+	game board: board.
+	playerA := Player new name: 'A'.
+	playerB := Player new name: 'B'.
+	game addPlayer: playerA.
+	game addPlayer: playerB.
+	self assert: game currentPlayer equals: playerA.
+	self assert: game nextPlayer equals: playerB.
+	^ game
+]
+
+{ #category : #'as yet unclassified' }
+GameExamples >> emptyGameWith16PictureCards [
+	<gtExample>
+	| game playerB playerA board |
+	game := Game new.
+	board := BoardExamples new boardWith16PictureCards.
 	game board: board.
 	playerA := Player new name: 'A'.
 	playerB := Player new name: 'B'.
