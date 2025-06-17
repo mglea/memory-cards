@@ -7,6 +7,14 @@ Class {
 	#category : #MemoryCards
 }
 
+{ #category : #accessing }
+TextCard >> addCardContentToElement: cardElement [
+	cardElement
+		addChild: (BrLabel new
+				aptitude: BrGlamorousLabelAptitude;
+				text: self content)
+]
+
 { #category : #'as yet unclassified' }
 TextCard >> content [
 	^ content

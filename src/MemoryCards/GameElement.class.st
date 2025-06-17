@@ -41,10 +41,7 @@ GameElement >> addCardsTo: container [
 							self createGame ] ].
 			eachCard isCovered
 				ifTrue: [ self addBackgroundToCard: cardElement ]
-				ifFalse: [ cardElement
-						addChild: (BrLabel new
-								aptitude: BrGlamorousLabelAptitude;
-								text: eachCard string) ].
+				ifFalse: [ eachCard addCardContentToElement: cardElement ].
 			cardElement margin: (BlInsets all: 25).
 			cardElement size: 50 @ 50.
 			container addChild: cardElement ]

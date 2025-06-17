@@ -57,6 +57,7 @@ Board >> gtBoardElementFor: aView [
 	<gtView>
 	^ aView explicit
 		title: 'Board';
+		priority: 1;
 		stencil: [ self asElement ]
 ]
 
@@ -67,7 +68,7 @@ Board >> gtCardsFor: aView [
 	^ aView columnedList
 		title: 'Cards';
 		items: [ cards ];
-		column: 'Cards' text: [ :each | each string ];
+		column: 'Cards' text: [ :each | each gtDisplayString ];
 		column: 'Covered' text: [ :each | each isCovered ]
 ]
 
