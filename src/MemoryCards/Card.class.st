@@ -2,21 +2,10 @@ Class {
 	#name : #Card,
 	#superclass : #Object,
 	#instVars : [
-		'isCovered',
-		'content'
+		'isCovered'
 	],
 	#category : #MemoryCards
 }
-
-{ #category : #'as yet unclassified' }
-Card >> content [
-	^ content
-]
-
-{ #category : #accessing }
-Card >> content: aString [ 
-    content:= aString
-]
 
 { #category : #accessing }
 Card >> covered: aBoolean [
@@ -29,11 +18,6 @@ Card >> flip [
 ]
 
 { #category : #'as yet unclassified' }
-Card >> gtDisplayOn: stream [
-	stream nextPutAll: self content.
-]
-
-{ #category : #'as yet unclassified' }
 Card >> initialize [
 	super initialize.
 	isCovered := true
@@ -42,9 +26,4 @@ Card >> initialize [
 { #category : #'as yet unclassified' }
 Card >> isCovered [
 	^isCovered 
-]
-
-{ #category : #'as yet unclassified' }
-Card >> string [
-	^ content
 ]

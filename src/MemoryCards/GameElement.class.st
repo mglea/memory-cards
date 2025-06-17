@@ -9,6 +9,20 @@ Class {
 }
 
 { #category : #accessing }
+GameElement >> addBackgroundToCard: cardElement [
+	1
+		to: 20
+		do: [ :x | 
+			cardElement
+				addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new
+								bold;
+								foreground: Color lightOrange);
+						text: 'PullOutPullOutPullOutPullOutPullOut';
+						transformDo: [ :aBuilder | aBuilder rotateBy: -45 ]) ]
+]
+
+{ #category : #accessing }
 GameElement >> addCardsTo: container [
 	self game board cards
 		do: [ :eachCard | 
@@ -26,16 +40,7 @@ GameElement >> addCardsTo: container [
 								ifTrue: [ self game nextTurn ].
 							self createGame ] ].
 			eachCard isCovered
-				ifTrue: [ 1
-						to: 20
-						do: [ :x | 
-							cardElement
-								addChild: (BrLabel new
-										aptitude: (BrGlamorousLabelAptitude new
-												bold;
-												foreground: Color lightOrange);
-										text: 'PullOutPullOutPullOutPullOutPullOut';
-										transformDo: [ :aBuilder | aBuilder rotateBy: -45 ]) ] ]
+				ifTrue: [ self addBackgroundToCard: cardElement ]
 				ifFalse: [ cardElement
 						addChild: (BrLabel new
 								aptitude: BrGlamorousLabelAptitude;
