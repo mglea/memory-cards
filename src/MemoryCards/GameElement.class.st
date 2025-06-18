@@ -29,8 +29,9 @@ GameElement >> addCardsTo: container [
 			| cardElement |
 			cardElement := BrVerticalPane new
 					background: Color white;
-					addAptitude: BrShadowAptitude;
-					alignCenter.
+					alignCenter;
+					margin: (BlInsets all: 25);
+					size: 50 @ 50.
 			cardElement
 				when: BlClickEvent
 				do: [ :e | 
@@ -43,12 +44,36 @@ GameElement >> addCardsTo: container [
 												action: [ self game nextTurn.
 													self createGame ]) ].
 							self createGame ] ].
-			eachCard isCovered
-				ifTrue: [ self addBackgroundToCard: cardElement ]
-				ifFalse: [ eachCard addCardContentToElement: cardElement ].
-			cardElement margin: (BlInsets all: 25).
-			cardElement size: 50 @ 50.
+			eachCard isCaptured
+				ifFalse: [ cardElement addAptitude: BrShadowAptitude.
+					eachCard isCovered
+						ifTrue: [ self addBackgroundToCard: cardElement ]
+						ifFalse: [ eachCard addCardContentToElement: cardElement ] ].
+
 			container addChild: cardElement ]
+]
+
+{ #category : #accessing }
+GameElement >> addEndGameTo: boardContainer [
+	| winner sortedPlayers |
+	sortedPlayers := game players copy
+			sort: [ :x :y | x capturedPairs size > y capturedPairs size ].
+	winner := sortedPlayers first.
+	winner capturedPairs size = sortedPlayers second capturedPairs size
+		ifTrue: [ boardContainer
+				addChild: (BrVerticalPane new
+						matchParent;
+						alignCenter;
+						addChild: (BrLabel new
+								aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
+								text: 'Tie game!')) ]
+		ifFalse: [ boardContainer
+				addChild: (BrVerticalPane new
+						matchParent;
+						alignCenter;
+						addChild: (BrLabel new
+								aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
+								text: 'Player ' , winner name , ' won!')) ]
 ]
 
 { #category : #accessing }
@@ -84,26 +109,8 @@ GameElement >> createGame [
 			layout: BlFlowLayout new;
 			margin: (BlInsets all: 20);
 			aptitude: BrShadowAptitude new beLarge.
-	game board cards isEmpty
-		ifTrue: [ | winner sortedPlayers |
-			sortedPlayers := game players copy
-					sort: [ :x :y | x capturedPairs size > y capturedPairs size ].
-			winner := sortedPlayers first.
-			winner capturedPairs size = sortedPlayers second capturedPairs size
-				ifTrue: [ boardContainer
-						addChild: (BrVerticalPane new
-								matchParent;
-								alignCenter;
-								addChild: (BrLabel new
-										aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
-										text: 'Tie game!')) ]
-				ifFalse: [ boardContainer
-						addChild: (BrVerticalPane new
-								matchParent;
-								alignCenter;
-								addChild: (BrLabel new
-										aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
-										text: 'Player ' , winner name , ' won!')) ] ]
+	game board areAllCardsCaptured
+		ifTrue: [ self addEndGameTo: boardContainer ]
 		ifFalse: [ self addCardsTo: boardContainer ].
 	playersContainer := BrVerticalPane new
 			margin: (BlInsets all: 20);

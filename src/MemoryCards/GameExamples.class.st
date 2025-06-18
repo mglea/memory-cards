@@ -67,7 +67,9 @@ GameExamples >> gameWithPlayerAMatchingAndNextTurn [
 	self assert: game currentPlayer capturedPairs size equals: 0.
 	self assert: game currentPlayer uncoveredCards size equals: 2.
 	game nextTurn.
-	self assert: game board cards size equals: 2 .
+	self assert: game board cards size equals: 4 .
+	self assert: game board cards first isCaptured.
+	self assert: game board cards second isCaptured.
 	self assert: game currentPlayer capturedPairs size equals: 1.
 	self assert: game currentPlayer uncoveredCards size equals: 0.
 	self assert: game isFinished not.

@@ -13,6 +13,11 @@ Board >> addCard: aCard [
 ]
 
 { #category : #'as yet unclassified' }
+Board >> areAllCardsCaptured [
+	^ cards allSatisfy: [:eachCard | eachCard isCaptured ]
+]
+
+{ #category : #'as yet unclassified' }
 Board >> card [
 	self shouldBeImplemented.
 ]
@@ -47,7 +52,7 @@ Board >> initialize [
 
 { #category : #'as yet unclassified' }
 Board >> removeCards: aCollection [
-	aCollection do: [ :eachCard | cards remove: eachCard ifAbsent: [  ] ]
+	aCollection do: [ :eachCard | eachCard beCaptured "cards remove: eachCard ifAbsent: [  ]"  ]
 ]
 
 { #category : #accessing }
