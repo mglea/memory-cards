@@ -62,9 +62,9 @@ Game >> gtPlayersFor: aView [
 		column: 'Players' text: [ :each | each gtDisplayString ];
 		column: 'Current'
 			text: [ :each | each = self currentPlayer ifTrue: [ ' ;)' ] ifFalse: [ ':(' ] ];
-		column: 'uncoveredCards' text: [ :each | each uncoveredCards size ];
-		column: 'capturedPairs' text: [ :each | each capturedPairs size ];
-		column: 'Card on the Board' text: [ :each | self board cards size ]
+		column: 'Uncovered cards' text: [ :each | each uncoveredCards size ];
+		column: 'Captured pairs' text: [ :each | each capturedPairs size ];
+		column: 'Cards on the board' text: [ :each | self board cards size ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -37,7 +37,11 @@ GameElement >> addCardsTo: container [
 					eachCard isCovered
 						ifTrue: [ self game currentPlayer uncover: eachCard.
 							self game currentPlayer uncoveredCards size = 2
-								ifTrue: [ self game nextTurn ].
+								ifTrue: [ cardElement
+										enqueueTask: (BlDelayedTaskAction new
+												delay: 1 seconds;
+												action: [ self game nextTurn.
+													self createGame ]) ].
 							self createGame ] ].
 			eachCard isCovered
 				ifTrue: [ self addBackgroundToCard: cardElement ]
