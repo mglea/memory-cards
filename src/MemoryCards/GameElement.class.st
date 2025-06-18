@@ -85,16 +85,25 @@ GameElement >> createGame [
 			margin: (BlInsets all: 20);
 			aptitude: BrShadowAptitude new beLarge.
 	game board cards isEmpty
-		ifTrue: [ | winner |
-			winner := (game players copy
-					sort: [ :x :y | x capturedPairs size > y capturedPairs size ]) first.
-			boardContainer
-				addChild: (BrVerticalPane new
-						matchParent;
-						alignCenter;
-						addChild: (BrLabel new
-								aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
-								text: 'Player ' , winner name , ' won!')) ]
+		ifTrue: [ | winner sortedPlayers |
+			sortedPlayers := game players copy
+					sort: [ :x :y | x capturedPairs size > y capturedPairs size ].
+			winner := sortedPlayers first.
+			winner capturedPairs size = sortedPlayers second capturedPairs size
+				ifTrue: [ boardContainer
+						addChild: (BrVerticalPane new
+								matchParent;
+								alignCenter;
+								addChild: (BrLabel new
+										aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
+										text: 'Tie game!')) ]
+				ifFalse: [ boardContainer
+						addChild: (BrVerticalPane new
+								matchParent;
+								alignCenter;
+								addChild: (BrLabel new
+										aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
+										text: 'Player ' , winner name , ' won!')) ] ]
 		ifFalse: [ self addCardsTo: boardContainer ].
 	playersContainer := BrVerticalPane new
 			margin: (BlInsets all: 20);

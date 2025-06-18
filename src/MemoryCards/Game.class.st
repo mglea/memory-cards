@@ -105,3 +105,11 @@ Game >> nextTurn [
 Game >> players [
 	^ players
 ]
+
+{ #category : #accessing }
+Game >> show [
+	| space |
+	space := BlSpace new.
+	space root addChild: self asElement asScalableElement.
+	^ space show
+]
