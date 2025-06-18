@@ -26,6 +26,7 @@ GameExamples >> emptyGameWith16PictureCards [
 	| game playerB playerA board |
 	game := Game new.
 	board := BoardExamples new boardWith16PictureCards.
+	"board shuffleCards."
 	game board: board.
 	playerA := Player new name: 'A'.
 	playerB := Player new name: 'B'.

@@ -72,24 +72,33 @@ GameElement >> addPlayersTo: playersContainer [
 
 { #category : #accessing }
 GameElement >> createGame [
-	| playersContainer boardElement container |
+	| playersContainer boardContainer |
 	gameContainer removeChildren.
-	container := BlElement new.
-	container background: Color white.
-	container size: 400 @ 400.
-	container layout: BlFlowLayout new.
-	self addCardsTo: container.
-	boardElement := container.
-	boardElement
-		margin: (BlInsets all: 20);
-		aptitude: BrShadowAptitude new beLarge.
+	boardContainer := BlElement new
+			background: Color white;
+			size: 400 @ 400;
+			layout: BlFlowLayout new;
+			margin: (BlInsets all: 20);
+			aptitude: BrShadowAptitude new beLarge.
+	game board cards isEmpty
+		ifTrue: [ | winner |
+			winner := (game players copy
+					sort: [ :x :y | x capturedPairs size > y capturedPairs size ]) first.
+			boardContainer
+				addChild: (BrVerticalPane new
+						matchParent;
+						alignCenter;
+						addChild: (BrLabel new
+								aptitude: (BrGlamorousLabelAptitude new fontSize: 20);
+								text: 'Player ' , winner name , ' won!')) ]
+		ifFalse: [ self addCardsTo: boardContainer ].
 	playersContainer := BrVerticalPane new
 			margin: (BlInsets all: 20);
 			vMatchParent;
 			hFitContent.
 	self addPlayersTo: playersContainer.
 	gameContainer addChild: playersContainer.
-	gameContainer addChild: boardElement
+	gameContainer addChild: boardContainer
 ]
 
 { #category : #accessing }
