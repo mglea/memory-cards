@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-06-18T14:50:08.408482+02:00"
+						"dateAndTimeString" : "2025-06-18T17:08:07.424147+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "An example game:"
 			},
 			{
 				"__type" : "exampleSnippet",

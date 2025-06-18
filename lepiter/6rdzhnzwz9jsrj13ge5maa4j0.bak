@@ -66,14 +66,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-06-18T15:18:01.668078+02:00"
+						"dateAndTimeString" : "2025-06-18T15:18:30.257617+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "2Kd+Ljr0DQChjq+zAqkycg=="
 				},
-				"code" : "GameExamples new emptyGameWith16PictureCards"
+				"code" : "GameExamples new emptyGameWith16PictureCards show"
 			}
 		]
 	},

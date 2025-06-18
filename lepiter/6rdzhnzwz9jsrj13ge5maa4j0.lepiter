@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-06-18T14:52:43.093902+02:00"
+						"dateAndTimeString" : "2025-06-18T17:08:37.73285+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "Execute the snippet below to start a new game in a new window."
 			},
 			{
 				"__type" : "pharoSnippet",
